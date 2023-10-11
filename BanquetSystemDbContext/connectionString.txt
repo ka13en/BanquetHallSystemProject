@@ -1,0 +1,1 @@
+﻿Server=localhost;Port=3306;Database=banquet_hall;UID=admin;Pwd=12345

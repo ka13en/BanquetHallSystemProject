@@ -1,0 +1,96 @@
+﻿<Window
+    x:Class="Banquet_Hall_App.Views.NewDishView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Banquet_Hall_App.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="addPerfomanceInputData"
+    Width="250"
+    Height="295"
+    d:DataContext="{d:DesignInstance d:Type=local:DishesViewModel}"
+    Background="#FF222222"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    mc:Ignorable="d">
+    <Grid Width="250" Height="295">
+        <StackPanel>
+            <Label
+                Name="dishLabel"
+                Height="42"
+                Margin="0,0,0,0"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                Content="New dish"
+                FontSize="20"
+                Foreground="White" />
+            <Label
+                Name="NewDishLabel"
+                Height="30"
+                Margin="0,0,0,0"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                Content="Dish name"
+                FontSize="17"
+                Foreground="White" />
+            <TextBox
+                x:Name="DishNameTextBox"
+                Width="178"
+                Height="25"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                Text="{Binding DishInfo.Name}" />
+
+            <Label
+                Name="DishDescriptionLabel"
+                Height="30"
+                Margin="0,5,0,0"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                Content="Dish description (optional)"
+                FontSize="17"
+                Foreground="White" />
+
+            <TextBox
+                Name="DishDescriptionTextBox"
+                Width="178"
+                Height="25"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Text="{Binding DishInfo.Description}" />
+
+            <Label
+                Height="30"
+                Margin="0,5,0,0"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                Content="Price"
+                FontSize="17"
+                Foreground="White" />
+
+            <TextBox
+                Name="DishPrice_TextBox"
+                Width="178"
+                Height="25"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Text="{Binding DishInfo.Price}" />
+
+            <Button
+                Name="EnterButton"
+                Width="178"
+                Height="35"
+                Margin="0,15,0,0"
+                Command="{Binding AddDishCommand}"
+                Content="Add dish"
+                FontSize="20" />
+        </StackPanel>
+    </Grid>
+</Window>

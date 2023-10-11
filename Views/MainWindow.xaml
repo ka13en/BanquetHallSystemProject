@@ -1,0 +1,316 @@
+﻿<Window
+    x:Class="Banquet_Hall_App.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Banquet_Hall_App.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AdminWindow"
+    Width="710"
+    Height="460"
+    Background="Black"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="CanUserDeleteRows" Value="False" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+            <Menu
+                Height="17.4"
+                VerticalAlignment="Top"
+                Background="#FF222222"
+                BorderBrush="White"
+                BorderThickness="0.2"
+                DockPanel.Dock="Top">
+                <MenuItem
+                    x:Name="User_MenuItem"
+                    BorderBrush="White"
+                    BorderThickness="0.6"
+                    Foreground="White"
+                    Header="User">
+                    <MenuItem
+                        x:Name="Info_MenuItem"
+                        Background="#FF222222"
+                        BorderBrush="White"
+                        BorderThickness="0.2"
+                        Click="Info_MenuItem_Click"
+                        Foreground="White"
+                        Header="Info" />
+                </MenuItem>
+                <MenuItem
+                    x:Name="MenuItemHelpTool"
+                    BorderBrush="White"
+                    BorderThickness="0.6"
+                    Click="MenuItemHelpTool_Click"
+                    Foreground="White"
+                    Header="Help" />
+            </Menu>
+        </DockPanel>
+        <TabControl Margin="224,19,4,4">
+            <TabItem
+                x:Name="ClientsTab"
+                d:DataContext="{d:DesignInstance d:Type=local:ClientsViewModel}"
+                Header="Clients">
+                <Grid Background="#FFE5E5E5">
+                    <DockPanel>
+                        <DataGrid
+                            Name="ClientsGrid"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Height="341"
+                            CanUserAddRows="False"
+                            CanUserResizeColumns="True"
+                            CanUserSortColumns="True"
+                            DockPanel.Dock="Top"
+                            HorizontalScrollBarVisibility="Auto"
+                            ItemsSource="{Binding Clients}"
+                            SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
+                            VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                                <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Phone number" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DockPanel DockPanel.Dock="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    x:Name="ButtonAddNewClient"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Click="ButtonAddNewClient_Click"
+                                    Content="Add"
+                                    Foreground="White" />
+                                <Button
+                                    x:Name="ButtonDeleteClient"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Command="{Binding DeleteClientCommand}"
+                                    Content="Delete"
+                                    Foreground="White" />
+                                <Button
+                                    x:Name="ButtonUpdateClient"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Command="{Binding UpdateClientCommand}"
+                                    Content="Update"
+                                    Foreground="White" />
+                            </StackPanel>
+                        </DockPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem
+                x:Name="OrdersTab"
+                Height="20"
+                VerticalAlignment="Bottom"
+                d:DataContext="{d:DesignInstance d:Type=local:OrdersViewModel}"
+                Header="Orders">
+                <Grid>
+                    <DockPanel>
+                        <DataGrid
+                            Name="OrdersGrid"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Height="341"
+                            CanUserAddRows="False"
+                            CanUserResizeColumns="True"
+                            CanUserSortColumns="True"
+                            DockPanel.Dock="Top"
+                            HorizontalScrollBarVisibility="Auto"
+                            ItemsSource="{Binding Orders}"
+                            SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
+                            VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Binding="{Binding Id}"
+                                    Header="Id"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding Date, StringFormat=dd/MM/yyyy}" Header="Date" />
+                                <DataGridTextColumn
+                                    Binding="{Binding TotalCost}"
+                                    Header="Total cost"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding Client.Id}" Header="Client id" />
+                                <DataGridTextColumn Binding="{Binding Client.Name}" Header="Client name" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DockPanel DockPanel.Dock="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    x:Name="ButtonAddNewOrder"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Click="ButtonAddNewOrder_Click"
+                                    Content="Add"
+                                    Foreground="White" />
+                                <Button
+                                    x:Name="ButtonDeleteOrder"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Command="{Binding DeleteOrderCommand}"
+                                    Content="Delete"
+                                    Foreground="White" />
+                                <Button
+                                    x:Name="ButtonUpdateOrder"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Command="{Binding UpdateOrderCommand}"
+                                    Content="Update"
+                                    Foreground="White" />
+                            </StackPanel>
+                        </DockPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem
+                x:Name="DishesTab"
+                d:DataContext="{d:DesignInstance d:Type=local:DishesViewModel}"
+                Header="Dishes">
+                <Grid Background="#FFE5E5E5">
+                    <DockPanel>
+                        <DataGrid
+                            x:Name="DishesGrid"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Height="341"
+                            CanUserAddRows="False"
+                            CanUserResizeColumns="True"
+                            CanUserSortColumns="True"
+                            DockPanel.Dock="Top"
+                            HorizontalScrollBarVisibility="Auto"
+                            ItemsSource="{Binding Dishes}"
+                            SelectedItem="{Binding SelectedDish, Mode=TwoWay}"
+                            VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                                <DataGridTextColumn Binding="{Binding Price}" Header="Price" />
+                                <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DockPanel DockPanel.Dock="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    x:Name="ButtonAddNewDish"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Click="ButtonOpenDishCreatorWindow_Click"
+                                    Content="Add"
+                                    Foreground="White" />
+                                <Button
+                                    x:Name="ButtonDeleteDish"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Command="{Binding DeleteDishCommand}"
+                                    Content="Delete"
+                                    Foreground="White" />
+                                <Button
+                                    x:Name="ButtonUpdateDish"
+                                    Width="50"
+                                    Height="30"
+                                    Background="Black"
+                                    Command="{Binding UpdateDishCommand}"
+                                    Content="Update"
+                                    Foreground="White" />
+                            </StackPanel>
+                        </DockPanel>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem
+                x:Name="EmployeesTab"
+                d:DataContext="{d:DesignInstance d:Type=local:EmployeesViewModel}"
+                Header="Employees">
+                <DockPanel>
+                    <DataGrid
+                        x:Name="EmployeesGrid"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Height="341"
+                        CanUserAddRows="False"
+                        CanUserResizeColumns="True"
+                        CanUserSortColumns="True"
+                        DockPanel.Dock="Top"
+                        HorizontalScrollBarVisibility="Auto"
+                        ItemsSource="{Binding Employees}"
+                        SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+                        VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                            <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Phone number" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DockPanel DockPanel.Dock="Bottom">
+                        <StackPanel Orientation="Horizontal">
+                            <Button
+                                x:Name="ButtonAddNewEmployee"
+                                Width="50"
+                                Height="30"
+                                Background="Black"
+                                Click="ButtonAddNewEmployee_Click"
+                                Content="Add"
+                                Foreground="White" />
+                            <Button
+                                x:Name="ButtonDeleteEmployee"
+                                Width="50"
+                                Height="30"
+                                Background="Black"
+                                Command="{Binding DeleteEmployeeCommand}"
+                                Content="Delete"
+                                Foreground="White" />
+                            <Button
+                                x:Name="ButtonUpdateEmployee"
+                                Width="50"
+                                Height="30"
+                                Background="Black"
+                                Command="{Binding UpdateEmployeeCommand}"
+                                Content="Update"
+                                Foreground="White" />
+                        </StackPanel>
+                    </DockPanel>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+        <DockPanel
+            Width="219"
+            Margin="0,19,0,0"
+            HorizontalAlignment="Left">
+            <ListBox
+                Width="216"
+                Margin="0,0,0,4"
+                DockPanel.Dock="Top">
+                <Button
+                    x:Name="ButtonOpenOrderDishWindow"
+                    Width="202"
+                    Height="30"
+                    Margin="0,0,0,0"
+                    Background="Black"
+                    Click="ButtonOpenOrderDishWindow_Click"
+                    Content="Orders details"
+                    Foreground="White" />
+                <Button
+                    x:Name="ButtonAddDishToOrder"
+                    Width="202"
+                    Height="30"
+                    Margin="0,0,0,0"
+                    Background="Black"
+                    Click="ButtonAddDishToOrder_Click"
+                    Content="Add dish to order"
+                    Foreground="White" />
+            </ListBox>
+        </DockPanel>
+    </Grid>
+</Window>

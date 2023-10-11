@@ -1,0 +1,57 @@
+﻿<Window
+    x:Class="Banquet_Hall_App.Views.OrderDishesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Banquet_Hall_App.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="OrderDishes"
+    Width="250"
+    Height="232"
+    d:DataContext="{d:DesignInstance d:Type=local:OrderDishViewModel}"
+    Background="#FF222222"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    mc:Ignorable="d">
+    <Grid Width="250" Height="232">
+        <StackPanel>
+            <Label
+                Height="30"
+                HorizontalContentAlignment="Center"
+                Content="Order details"
+                DockPanel.Dock="Top"
+                FontSize="17"
+                Foreground="White" />
+            <DataGrid
+                Name="OrdersDishesDataGrid"
+                Height="150"
+                Margin="0,5,0,0"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                ItemsSource="{Binding OrderDishes}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Order.Id}" Header="Order id" />
+                    <DataGridTextColumn Binding="{Binding Dish.Name}" Header="Dish" />
+                    <DataGridTextColumn Binding="{Binding DishesAmount}" Header="Amount" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Name="DeleteItem_Button"
+                    Width="60"
+                    Height="30"
+                    Command="{Binding DeleteItemCommand}"
+                    Content="Delete" />
+                <Button
+                    Name="UpdateItem_Button"
+                    Width="60"
+                    Height="30"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding UpdateItemCommand}"
+                    Content="Update" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

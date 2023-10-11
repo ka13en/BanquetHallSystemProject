@@ -1,0 +1,80 @@
+﻿<Window
+    x:Class="Banquet_Hall_App.Views.NewOrderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Banquet_Hall_App.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="NewOrderView"
+    Width="250"
+    Height="245"
+    d:DataContext="{d:DesignInstance d:Type=local:OrdersViewModel}"
+    Background="#FF222222"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    mc:Ignorable="d">
+    <Grid Width="250" Height="245">
+        <StackPanel>
+            <Label
+                Name="orderLabel"
+                Height="42"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="New order"
+                FontSize="20"
+                Foreground="White" />
+
+            <Label
+                Name="PerfomanceDate"
+                Width="178"
+                Height="30"
+                Margin="0,5,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                Content="Perfomance date"
+                FontSize="17"
+                Foreground="White" />
+            <DatePicker
+                Name="OrderDatePicker"
+                Width="178"
+                Height="25"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                SelectedDate="{Binding OrderInfo.Date}" />
+            <Label
+                Width="178"
+                Margin="0,5,0,0"
+                HorizontalContentAlignment="Center"
+                Content="Client"
+                FontSize="17"
+                Foreground="White" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ComboBox
+                    Name="ClientsComboBox"
+                    Width="140"
+                    Height="25"
+                    Margin="0,0,3,0"
+                    d:DataContext="{d:DesignInstance d:Type=local:OrdersViewModel}"
+                    DisplayMemberPath="Name"
+                    SelectedItem="{Binding OrderInfo.Client, Mode=TwoWay}"/>
+                <Button
+                    Name="NewClientButton"
+                    Width="35"
+                    Height="25"
+                    Click="NewClientButton_Click"
+                    Content="New" />
+            </StackPanel>
+            <Button
+                Name="EnterButton"
+                Width="178"
+                Height="35"
+                Margin="0,15,0,0"
+                HorizontalAlignment="Center"
+                Command="{Binding AddOrderCommand}"
+                IsEnabled="{Binding }"
+                Content="Add order"
+                FontSize="20" />
+        </StackPanel>
+    </Grid>
+</Window>
